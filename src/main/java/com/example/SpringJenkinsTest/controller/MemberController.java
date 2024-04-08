@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 @Controller
@@ -20,12 +22,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("templates/members/new")
+    @GetMapping("members/new")
     public String createForm(){
-        return "templates/members/createMemberForm";
+        return "members/createMemberForm";
     }
 
-    @PostMapping("/templates/members/new")
+    @PostMapping("/members/new")
     public String create(MemberForm form){
         Member member = new Member();
         member.setName(form.getName());
@@ -37,12 +39,12 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/templates/members")
+    @GetMapping("/members")
     public String list(Model model){
         List<Member> members = memberService.findMembers();
-        model.addAttribute("templates/members", members);
+        model.addAttribute("members", members);
 
-        return "templates/members/memberList";
+        return "members/memberList";
     }
 
 //    @GetMapping("/yourstatus")
